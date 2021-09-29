@@ -25,8 +25,8 @@ model Filme{
   nome   String
   imagem String?
   data_nascimento Int?
-   ator        String
-   generos Genero[]
+  ator        String
+  generos Genero[]
 
   }
 
