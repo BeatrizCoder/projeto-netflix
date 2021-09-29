@@ -14,19 +14,26 @@ model Filme{
   id     Int  @id @default(autoincrement())
   nome   String
   imagem String?
-  data_lancamento Int?
-  tempo_duracao String?
-  genero        String
+  data_lancamento DateTime?
+  tempo_duracao Int?
   participantes Participante[]
+  genero Genero[]
 
 }
-model Filme{
+model Participante{
   id     Int  @id @default(autoincrement())
   nome   String
   imagem String?
-  data_nascimento Int?
-  ator        String
-  generos Genero[]
-
+  data_nascimento DateTime?
+  staff       Boolean 
+  ator        Boolean
+  filme       Filme? @relation(fields: [filmeId], references:[id])
+  filmeId     Int?
   }
 
+model Genero{
+  id  Int  @id@default(autoincrement())
+  nome   String
+  filme Filme?@relation(fields:[filmeId], references:[id])
+  filmeId Int?
+}
