@@ -2,3 +2,4 @@ npx prisma generate - usar funcoes das models, é preciso
 npx prisma migrate dev criar umanc tabelas bancos
 npx prisma db push 
 npm run format
+ npm i class transformer pro validation pipes
