@@ -1,10 +1,15 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { isNotEmpty, IsNotEmpty, IsOptional } from 'class-validator';
 
-export class CreateFilmeDto{
-    @IsNotEmpty()
+export class CreateFilmeDto {
+  @IsNotEmpty()
   nome: string;
 
-    @IsOptional()
-    imagem:string;
+  @IsOptional()
+  imagem: string;
 
+  @IsOptional()
+  data_lancamento: Date;
+
+  @IsNotEmpty()
+  tempo_duracao: number;
 }

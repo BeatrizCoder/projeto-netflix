@@ -33,7 +33,7 @@ model Participante{
 
 model Genero{
   id  Int  @id@default(autoincrement())
-  nome   String
+  nome   String?
   filme Filme?@relation(fields:[filmeId], references:[id])
   filmeId Int?
 }
