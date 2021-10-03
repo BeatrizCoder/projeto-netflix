@@ -1,5 +1,7 @@
-npx prisma generate - usar funcoes das models, é preciso
 npx prisma migrate dev criar umanc tabelas bancos
 npx prisma db push 
-npm run format
+npx prisma generate - usar funcoes das models, é preciso
+
+npm run format formata o codigo e exclui erros apontados pelo vs
  npm i class transformer pro validation pipes
+ npm install class-transformer

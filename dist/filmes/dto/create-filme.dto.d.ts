@@ -1,6 +1,6 @@
 export declare class CreateFilmeDto {
     nome: string;
     imagem: string;
-    data_lancamento: Date;
+    data_lancamento: number;
     tempo_duracao: number;
 }
