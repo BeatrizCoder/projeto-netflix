@@ -12,36 +12,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FilmesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const updateFilme_dto_1 = require("./dto/updateFilme.dto");
 let FilmesService = class FilmesService {
-    constructor(prisma) {
-        this.prisma = prisma;
+    constructor(prismaSerice) {
+        this.prismaSerice = prismaSerice;
     }
-    async getAll() {
-        return this.prisma.filme.findMany();
-    }
-    async createFilme(data) {
-        return this.prisma.filme.create({ data });
-    }
-    async deleteOneFilme(where) {
-        return this.prisma.filme.delete({ where });
-    }
-    async deleteAllFilmes() {
-        return this.prisma.filme.deleteMany();
-    }
-    async updateOneFilme(filmeId, data) {
-        return this.prisma.filme.update({
-            data,
-            where: {
-                id: filmeId,
-            },
+    async createFilme(filme) {
+        var _a, _b;
+        const generos = (_a = filme.generos) === null || _a === void 0 ? void 0 : _a.map((genero));
+        ({
+            id: generos,
         });
-    }
-    async getOneFilme(filmeId) {
-        return this.prisma.filme.findUnique({
-            where: {
-                id: filmeId,
-            },
+        const participantes = (_b = filme.participantes) === null || _b === void 0 ? void 0 : _b.map((participante));
+        ({
+            id: participantes,
+            return: this.prismaService.filme.create({
+                data: {
+                    nome: imagem, filme, : .imagem,
+                    data_lancamento: filme.data_lancamento,
+                    tempo_duracao: filme.tempo_duracao,
+                    generos: {
+                        participantes,
+                        connect: generos, participantes
+                    },
+                },
+                include: {
+                    generos: true,
+                    participantes: true,
+                },
+            })
         });
+        async;
+        (0, updateFilme_dto_1.UpdateFilmeDto)(id, number, filme, updateFilme_dto_1.UpdateFilmeDto);
+        {
+            return await this;
+            prisma_service_1.PrismaService.filme.update({
+                data: Object.assign(Object.assign({}, filme), { id: undefined }),
+                where: {
+                    id,
+                },
+            });
+        }
+        async;
+        deleteFilme(id, number);
+        {
+            return this;
+            prisma.Service.filme.delete({
+                where: {
+                    id,
+                },
+            });
+        }
     }
 };
 FilmesService = __decorate([

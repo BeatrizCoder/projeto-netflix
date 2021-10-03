@@ -1,8 +1,10 @@
-import { CreateGeneroDto } from './dto/create-genero.dto;;
 import { GenerosService } from './generos.service';
-import { Genero } from '.prisma/client';
-export declare class GenerosController {
-    private generosService;
+import { CreateGeneroDto } from './dto/createGenero.dto';
+import { UpdateGeneroDto } from './dto/updateGenero.dto';
+export default class GenerosController {
+    private readonly generosService;
     constructor(generosService: GenerosService);
-    create(createGenero: CreateGeneroDto): Promise<Genero>;
+    createGenero(genero: CreateGeneroDto): Promise<any>;
+    updateGenero(id: number, genero: UpdateGeneroDto): Promise<any>;
+    deleteFilme(id: number): Promise<any>;
 }

@@ -11,84 +11,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FilmesController = void 0;
 const common_1 = require("@nestjs/common");
-const create_filme_dto_1 = require("./dto/create-filme.dto");
 const filmes_service_1 = require("./filmes.service");
+const createFilme_dto_1 = require("./dto/createFilme.dto");
+const updateFilme_dto_1 = require("./dto/updateFilme.dto");
 let FilmesController = class FilmesController {
     constructor(filmesService) {
         this.filmesService = filmesService;
     }
-    async create(createFilme) {
-        return this.filmesService.createFilme(createFilme);
+    async createFilme(filme) {
+        return this.filmesService.createFilmes(filmes);
     }
-    async findUnique(id) {
-        return this.filmesService.getOneFilme(id);
+    async updateFilme(id, filme) {
+        return this.filmesService.updateFilme(id, filme);
     }
-    async findMany() {
-        return this.filmesService.getAll();
-    }
-    async deleteMany() {
-        return this.filmesService.deleteAllFilmes();
-    }
-    async delete(id) {
-        return this.filmesService.deleteOneFilme({ id: Number(id) });
-    }
-    async update(updateFilme, id) {
-        return this.filmesService.updateOneFilme(id, updateFilme);
+    async deleteFilme(id) {
+        return this.filmesService.deleteFilme(id);
     }
 };
 __decorate([
-    (0, common_1.Post)('/create'),
+    (0, common_1.Post)(),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_filme_dto_1.CreateFilmeDto]),
+    __metadata("design:paramtypes", [typeof (_a = typeof createFilme_dto_1.CreateFilmeDto !== "undefined" && createFilme_dto_1.CreateFilmeDto) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
-], FilmesController.prototype, "create", null);
+], FilmesController.prototype, "createFilme", null);
 __decorate([
-    (0, common_1.Get)('/list/:id'),
+    (0, common_1.Put)(':id'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, typeof (_b = typeof updateFilme_dto_1.UpdateFilmeDto !== "undefined" && updateFilme_dto_1.UpdateFilmeDto) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
-], FilmesController.prototype, "findUnique", null);
+], FilmesController.prototype, "updateFilme", null);
 __decorate([
-    (0, common_1.Get)('/list'),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], FilmesController.prototype, "findMany", null);
-__decorate([
-    (0, common_1.Delete)('/delete'),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], FilmesController.prototype, "deleteMany", null);
-__decorate([
-    (0, common_1.Delete)('/delete/:id'),
+    (0, common_1.Delete)(':id'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], FilmesController.prototype, "delete", null);
-__decorate([
-    (0, common_1.Put)('/update/:id'),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_filme_dto_1.CreateFilmeDto, Number]),
-    __metadata("design:returntype", Promise)
-], FilmesController.prototype, "update", null);
+], FilmesController.prototype, "deleteFilme", null);
 FilmesController = __decorate([
     (0, common_1.Controller)('filmes'),
     __metadata("design:paramtypes", [filmes_service_1.FilmesService])
 ], FilmesController);
-exports.FilmesController = FilmesController;
+exports.default = FilmesController;
 //# sourceMappingURL=filmes.controller.js.map

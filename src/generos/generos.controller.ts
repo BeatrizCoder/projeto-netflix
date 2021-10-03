@@ -1,58 +1,40 @@
 import {
   Body,
   Controller,
-  Get,
-  Post,
-  Delete,
   Param,
+  Post,
   Put,
   ValidationPipe,
   UsePipes,
+  Delete,
   ParseIntPipe,
 } from '@nestjs/common';
-import { CreateGeneroDto } from './dto/create-genero.dto';
-import { GenerosService} from './generos.module';
-import { Genero } from '.prisma/client';
+import { GenerosService } from './generos.service';
+import { CreateGeneroDto } from './dto/createGenero.dto';
+import { UpdateGeneroDto } from './dto/updateGenero.dto';
 
 @Controller('generos')
-export class FilmesController {
-  constructor(private generosService: GenerosService) {}
+export default class GenerosController {
+  constructor(private readonly generosService: GenerosService) {}
 
-  @Post('/create')
+  @Post()
   @UsePipes(ValidationPipe)
-  async create(@Body() CreateGenero: CreateGeneroDto): Promise<Genero> {
-    return this.generosService.CreateGenero(CreateGenero);
+  async createGenero(@Body() genero: CreateGeneroDto) {
+    return this.generosService.createGeneros(generos);
   }
 
-  @Get('/list/:id')
+  @Put(':id')
   @UsePipes(ValidationPipe)
-  async findUnique(@Param('id', ParseIntPipe) id: number) {
-    return this.generosService.getOneGenero(id);
-  }
-  @Get('/list')
-  @UsePipes(ValidationPipe)
-  async findMany(): Promise<Genero[]> {
-    return this.generosService.getAll();
-  }
-
-  @Delete('/delete')
-  @UsePipes(ValidationPipe)
-  async deleteMany() {
-    return this.generosService.deleteAllGeneros();
-  }
-
-  @Delete('/delete/:id')
-  @UsePipes(ValidationPipe)
-  async delete(@Param('id') id: string) {
-    return this.generosService.deleteOneGenero({ id: Number(id) });
-  }
-
-  @Put('/update/:id')
-  @UsePipes(ValidationPipe)
-  async update(
-    @Body() updateGenero: CreateGeneroDto,
+  async updateGenero(
     @Param('id', ParseIntPipe) id: number,
-  ): Promise<Genero> {
-    return this.generosService.updateOneGenero(id, updateGenero);
+    @Body() genero: UpdateGeneroDto,
+  ) {
+    return this.generosService.updateGenero(id, genero);
+  }
+
+  @Delete(':id')
+  @UsePipes(ValidationPipe)
+  async deleteFilme(@Param('id') id: number) {
+    return this.generosService.deleteGenero(id);
   }
 }

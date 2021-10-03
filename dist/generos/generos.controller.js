@@ -11,57 +11,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenerosController = void 0;
 const common_1 = require("@nestjs/common");
-const create_genero_dto_1 = require("./dto/create-genero.dto;");
 const generos_service_1 = require("./generos.service");
+const createGenero_dto_1 = require("./dto/createGenero.dto");
+const updateGenero_dto_1 = require("./dto/updateGenero.dto");
 let GenerosController = class GenerosController {
     constructor(generosService) {
         this.generosService = generosService;
     }
-    async create(createGenero) {
-        return this.generosService.createGenero(createGenero);
-        findMany();
-        Promise < genero[] > {
-            return: this.generoService.getAll()
-        };
-        findUnique();
-        id: number;
-        {
-            return this.generosService.getOneFilme(id);
-        }
-        update();
-        updateGenero: create_genero_dto_1.CreateGeneroDto,
-        ;
-        id: number,
-        ;
-        Promise < Filme > {
-            return: this.generosService.updateOneFilme(id, updateFilme)
-        };
-        delete ();
-        id: string;
-        {
-            return this.generosServicesService.deleteOneGenero({ id: Number(id) });
-        }
-        deleteMany();
-        {
-            return this.generosService.deleteAllFilmes();
-        }
+    async createGenero(genero) {
+        return this.generosService.createGeneros(generos);
+    }
+    async updateGenero(id, genero) {
+        return this.generosService.updateGenero(id, genero);
+    }
+    async deleteFilme(id) {
+        return this.generosService.deleteGenero(id);
     }
 };
 __decorate([
-    (0, common_1.Post)('/create'),
+    (0, common_1.Post)(),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_a = typeof create_genero_dto_1.CreateGeneroDto !== "undefined" && create_genero_dto_1.CreateGeneroDto) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [typeof (_a = typeof createGenero_dto_1.CreateGeneroDto !== "undefined" && createGenero_dto_1.CreateGeneroDto) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
-], GenerosController.prototype, "create", null);
+], GenerosController.prototype, "createGenero", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, typeof (_b = typeof updateGenero_dto_1.UpdateGeneroDto !== "undefined" && updateGenero_dto_1.UpdateGeneroDto) === "function" ? _b : Object]),
+    __metadata("design:returntype", Promise)
+], GenerosController.prototype, "updateGenero", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], GenerosController.prototype, "deleteFilme", null);
 GenerosController = __decorate([
     (0, common_1.Controller)('generos'),
-    __metadata("design:paramtypes", [generos_service_1.GenerosService])
+    __metadata("design:paramtypes", [typeof (_c = typeof generos_service_1.GenerosService !== "undefined" && generos_service_1.GenerosService) === "function" ? _c : Object])
 ], GenerosController);
-exports.GenerosController = GenerosController;
+exports.default = GenerosController;
 //# sourceMappingURL=generos.controller.js.map

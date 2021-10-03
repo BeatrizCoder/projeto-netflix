@@ -1,58 +1,40 @@
 import {
   Body,
   Controller,
-  Get,
-  Post,
-  Delete,
   Param,
+  Post,
   Put,
   ValidationPipe,
   UsePipes,
+  Delete,
   ParseIntPipe,
 } from '@nestjs/common';
-import { CreateParticipanteDto } from './dto/create-participante.dto';
 import { ParticipantesService } from './participantes.service';
-import { Participante } from '.prisma/client';
+import { CreateParticipanteDto } from './dto/create-participante.dto';
+import { UpdateParticipanteDto } from './dto/updatePaticipante.dto';
 
 @Controller('participantes')
-export class ParticipantesController {
-  constructor(private participantesService: PrticipantesService) {}
+export default class ParticipantesController {
+  constructor(private readonly participantesService: ParticipantesService) {}
 
-  @Post('/create')
+  @Post()
   @UsePipes(ValidationPipe)
-  async create(@Body() CreateParticipanteDto: CreateParticipanteDto): Promise<Participante> {
-    return this.participanteService.createParticipante(CreateParticipante);
+  async createParticipante(@Body() participante: CreateParticipanteDto) {
+    return this.participantesService.createParticipantes(participante);
   }
 
-  @Get('/list/:id')
+  @Put(':id')
   @UsePipes(ValidationPipe)
-  async findUnique(@Param('id', ParseIntPipe) id: number) {
-    return this.participantesService.getOneParticipante(id);
-  }
-  @Get('/list')
-  @UsePipes(ValidationPipe)
-  async findMany(): Promise<Participante[]> {
-    return this.participantesService.getAll();
-  }
-
-  @Delete('/delete')
-  @UsePipes(ValidationPipe)
-  async deleteMany() {
-    return this.participantesService.deleteAllParticipantes();
-  }
-
-  @Delete('/delete/:id')
-  @UsePipes(ValidationPipe)
-  async delete(@Param('id') id: string) {
-    return this.participantesService.deleteOneParticipante({ id: Number(id) });
-  }
-
-  @Put('/update/:id')
-  @UsePipes(ValidationPipe)
-  async update(
-    @Body() updateParticipante: CreateParticipanteDto
+  async updateParticipante(
     @Param('id', ParseIntPipe) id: number,
-  ): Promise<Participante> {
-    return this.participantesService.updateOneParticipante(id, updateParticipante);
+    @Body() genero: UpdateParticipanteDto,
+  ) {
+    return this.participantesService.updateParticipante(id, participante);
+  }
+
+  @Delete(':id')
+  @UsePipes(ValidationPipe)
+  async deleteParticipante(@Param('id') id: number) {
+    return this.participantesService.deleteParticipante(id);
   }
 }

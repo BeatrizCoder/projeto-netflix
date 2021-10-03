@@ -13,54 +13,52 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ParticipantesController = void 0;
 const common_1 = require("@nestjs/common");
+const participantes_service_1 = require("./participantes.service");
 const create_participante_dto_1 = require("./dto/create-participante.dto");
+const updatePaticipante_dto_1 = require("./dto/updatePaticipante.dto");
 let ParticipantesController = class ParticipantesController {
     constructor(participantesService) {
         this.participantesService = participantesService;
     }
-    async create(createGenero) {
-        return this.participantesService.createParticipante(createParticiante);
-        findMany();
-        Promise < participante[] > {
-            return: this.participanteService.getAll()
-        };
-        findUnique();
-        id: number;
-        {
-            return this.participantesService.getOneParticipante(id);
-        }
-        update();
-        updateParticipante: create_participante_dto_1.CreateParticipanteDto,
-        ;
-        id: number,
-        ;
-        Promise < Filme > {
-            return: this.participantesService.updateOneParticipante(id, updateParticipante)
-        };
-        delete ();
-        id: string;
-        {
-            return this.participantesService.deleteOneParticipante({ id: Number(id) });
-        }
-        deleteMany();
-        {
-            return this.participantesService.deleteAllParticipantes();
-        }
+    async createParticipante(participante) {
+        return this.participantesService.createParticipantes(participante);
+    }
+    async updateParticipante(id, genero) {
+        return this.participantesService.updateParticipante(id, participante);
+    }
+    async deleteParticipante(id) {
+        return this.participantesService.deleteParticipante(id);
     }
 };
 __decorate([
-    (0, common_1.Post)('/create'),
+    (0, common_1.Post)(),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_participante_dto_1.CreateParticipanteDto]),
     __metadata("design:returntype", Promise)
-], ParticipantesController.prototype, "create", null);
+], ParticipantesController.prototype, "createParticipante", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, typeof (_a = typeof updatePaticipante_dto_1.UpdateParticipanteDto !== "undefined" && updatePaticipante_dto_1.UpdateParticipanteDto) === "function" ? _a : Object]),
+    __metadata("design:returntype", Promise)
+], ParticipantesController.prototype, "updateParticipante", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ParticipantesController.prototype, "deleteParticipante", null);
 ParticipantesController = __decorate([
     (0, common_1.Controller)('participantes'),
-    __metadata("design:paramtypes", [typeof (_a = typeof ParticpantesService !== "undefined" && ParticpantesService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [participantes_service_1.ParticipantesService])
 ], ParticipantesController);
-exports.ParticipantesController = ParticipantesController;
+exports.default = ParticipantesController;
 //# sourceMappingURL=participantes.controller.js.map

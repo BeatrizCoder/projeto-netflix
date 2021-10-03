@@ -1,43 +1,54 @@
-import { Injectable } from '@nestjs/common';
-import { Participante, Prisma } from '.prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "src/prisma/prisma.service";
+import { CreateParticipanteDto } from "./dto/create-participante.dto";
+import { UpdateParticipanteDto } from './dto/updateParticipante.dto';
+
 @Injectable()
-export class ParticipantesService {
-  constructor(private prisma: PrismaService) {}
-
-  async getAll(): Promise<Participante[]> {
-    return this.prisma.participante.findMany();
-  }
-
-  async createParticipante(data: Prisma.ParticipanteCreateInput): Promise<Participante> {
-    return this.prisma.participante.create({ data });
-  }
-
-  async deleteOneParticipante(where: Prisma.ParticipanteWhereUniqueInput): Promise<Participante> {
-    return this.prisma.participante.delete({ where });
-  }
-
-  async deleteAllParticipantes() {
-    return this.prisma.filme.deleteMany();
-  }
-
-  async updateOneParticipante(
-    filmeId: number,
-    data: Prisma.ParticipanteCreateInput,
-  ): Promise<Participante> {
-    return this.prisma.participante.update({
-      data,
-      where: {
-        id: participanteId,
-      },
+export class ParticipantesService{
+  constructor(private readonly prismaSerice:PrismaService){}
+  async createFilme(filme:CreateParticipanteDto){
+    const filmes=participantes.filmes?.map((filme))=>({
+      id:filmes,
     });
-  }
+      const generos=participantes.generos?.map((genero))=>({
+        id:generos,
 
-  async getOneParticipante(filmeId: number): Promise<Participante> {
-    return this.prisma.participante.findUnique({
-      where: {
-        id: participanteId,
-      },
-    });
-  }
-}
+      return this.prismaService.participante.create({
+        data:{
+          nome:
+          imagem:participante.imagem,
+          data_lancamento:participante.data_lancamento,
+          tempo_duracao:participante.tempo_duracao,
+          staff:Participante.staff,
+          ator:
+          filmes:{
+          generos
+            connect: filmes,generos
+
+          },
+        },
+        include:{
+          filmes:true,
+          generos:true,
+        },
+      });
+    }
+    async UpdateParticipanteDto(id:number, participante:UpdateParticipanteDto){
+      return await this PrismaService.participante.update({
+        data:{
+          ...participante,
+          id:undefined,
+        },
+        where:{
+          id,
+        },
+      });
+    }
+    async deleteParticipante(id: number){
+      return this prisma.Service.participante.delete({
+        where: {
+          id,
+        },
+      });
+    }
+  

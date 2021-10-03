@@ -1,43 +1,50 @@
-import { Injectable } from '@nestjs/common';
-import { Genero, Prisma } from '.prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "src/prisma/prisma.service";
+import { CreateFilmeDto } from "./dto/create-filme.dto";
+import { UpdateFilmeDto } from './dto/updateFilme.dto';
+
 @Injectable()
-export class GenerosService {
-  constructor(private prisma: PrismaService) {}
-
-  async getAll(): Promise<Genero[]> {
-    return this.prisma.genero.findMany();
-  }
-
-  async createGenero(data: Prisma.GeneroCreateInput): Promise<Genero> {
-    return this.prisma.genero.create({ data });
-  }
-
-  async deleteOneGenero(where: Prisma.FilmeWhereUniqueInput): Promise<Genero> {
-    return this.prisma.genero.delete({ where });
-  }
-
-  async deleteAllGeneros() {
-    return this.prisma.genero.deleteMany();
-  }
-
-  async updateOneGenero(
-    filmeId: number,
-    data: Prisma.FilmeCreateInput,
-  ): Promise<Genero> {
-    return this.prisma.genero.update({
-      data,
-      where: {
-        id: generoId,
-      },
+export class FilmesService{
+  constructor(private readonly prismaSerice:PrismaService){}
+  async createGenero(genero:CreateFilmeDto){
+    const filmes=genero.filmes?.map((filme))=>({
+      id:filmes,
     });
-  }
+      const participantes=genero.participantes?.map((participante))=>({
+        id:participantes,
 
-  async getOneGenero(generoId: number): Promise<Genero> {
-    return this.prisma.genero.findUnique({
-      where: {
-        id: generoId,
-      },
-    });
-  }
-}
+      return this.prismaService.genero.create({
+        data:{
+          nome:genero.nome,
+          filme:genero.filme,
+          filmes:{
+          participantes
+            connect:filmes,participantes
+
+          },
+        },
+        include:{
+          filmes:true,
+          participantes:true,
+        },
+      });
+    }
+    async UpdateGeneroDto(id:number, genero:UpdateGeneroDto){
+      return await this PrismaService.genero.update({
+        data:{
+          ...genero,
+          id:undefined,
+        },
+        where:{
+          id,
+        },
+      });
+    }
+    async deleteGenero(id: number){
+      return this prisma.Service.genero.delete({
+        where: {
+          id,
+        },
+      });
+    }
+  

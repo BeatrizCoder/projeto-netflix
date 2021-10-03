@@ -1,13 +1,10 @@
-import { CreateFilmeDto } from './dto/create-filme.dto';
 import { FilmesService } from './filmes.service';
-import { Filme } from '.prisma/client';
-export declare class FilmesController {
-    private filmesService;
+import { CreateFilmeDto } from './dto/createFilme.dto';
+import { UpdateFilmeDto } from './dto/updateFilme.dto';
+export default class FilmesController {
+    private readonly filmesService;
     constructor(filmesService: FilmesService);
-    create(createFilme: CreateFilmeDto): Promise<Filme>;
-    findUnique(id: number): Promise<Filme>;
-    findMany(): Promise<Filme[]>;
-    deleteMany(): Promise<import(".prisma/client").Prisma.BatchPayload>;
-    delete(id: string): Promise<Filme>;
-    update(updateFilme: CreateFilmeDto, id: number): Promise<Filme>;
+    createFilme(filme: CreateFilmeDto): Promise<any>;
+    updateFilme(id: number, filme: UpdateFilmeDto): Promise<any>;
+    deleteFilme(id: number): Promise<any>;
 }
