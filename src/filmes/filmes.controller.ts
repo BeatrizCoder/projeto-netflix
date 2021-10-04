@@ -20,7 +20,7 @@ export default class FilmesController {
   @Post()
   @UsePipes(ValidationPipe)
   async createFilme(@Body() filme: CreateFilmeDto) {
-    return this.filmesService.createFilmes(filmes);
+    return this.filmesService.createFilme(filme);
   }
 
   @Put(':id')

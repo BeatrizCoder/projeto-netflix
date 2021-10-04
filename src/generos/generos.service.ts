@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { CreateFilmeDto } from "./dto/create-filme.dto";
-import { UpdateFilmeDto } from './dto/updateFilme.dto';
+import { CreateGeneroDto } from "./dto/create-genero.dto;
+import { UpdateGeneroDto } from './dto/updateGenero.dto';
 
 @Injectable()
-export class FilmesService{
+export class GeneroService{
   constructor(private readonly prismaSerice:PrismaService){}
-  async createGenero(genero:CreateFilmeDto){
+  async createGenero(genero:CreateGeneroDto){
     const filmes=genero.filmes?.map((filme))=>({
       id:filmes,
     });
@@ -19,7 +19,7 @@ export class FilmesService{
           filme:genero.filme,
           filmes:{
           participantes
-            connect:filmes,participantes
+          connect:filmes,participantes
 
           },
         },
